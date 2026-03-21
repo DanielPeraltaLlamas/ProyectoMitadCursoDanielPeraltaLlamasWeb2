@@ -2,13 +2,23 @@ import express from "express";
 import dbConnect from './config/db.js';
 import userRouter from "./routes/user.routes.js";
 import helmet from "helmet";
-
+import cors from 'cors';
+import rateLimit from 'express-rate-limit';
+import mongoSanitize from 'express-mongo-sanitize';
+import { errorHandler, notFoundHandler } from './middleware/error-handler.js';
 
 const app = express();
 
-
 app.use(helmet());
+app.use(cors());
 app.use(express.json());
+app.use(mongoSanitize());
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+});
+app.use(limiter);
 
 app.get('/health', (req, res) => 
 {
@@ -16,15 +26,8 @@ app.get('/health', (req, res) =>
 });
 
 app.use("/api/user", userRouter);
+app.use(notFoundHandler);
+app.use(errorHandler);
 
-const PORT = process.env.PORT || 3000;
+export default app;
 
-const startServer = async () => 
-{
-  await dbConnect();
-  app.listen(PORT, () => {
-    console.log(`Servidor en http://localhost:${PORT}`);
-  });
-};
-
-startServer();
