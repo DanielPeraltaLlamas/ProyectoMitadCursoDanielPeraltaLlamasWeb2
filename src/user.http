@@ -1,0 +1,65 @@
+@baseUrl = http://localhost:3000/api/user
+
+POST {{baseUrl}}/register
+Content-Type: application/json
+
+{
+  "email": "fdefsef@test.com",
+  "password": "12345678",
+  "name": "Juan",
+  "lastName": "Pérez"
+}
+
+PUT {{baseUrl}}/validation
+Content-Type: application/json
+
+{
+  "email": "fdefsef@test.com",
+  "code": "585909"
+}
+
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "12345678"
+}
+
+PUT {{baseUrl}}/register
+Content-Type: application/json
+
+{
+  "userId": "69be70eff6c24c6a5fb4d018",
+  "name": "Juan Updated",
+  "lastName": "Pérez Updated",
+  "nif": "12345678A",
+  "address": {
+    "street": "Calle Mayor",
+    "number": "1",
+    "postal": "28001",
+    "city": "Madrid",
+    "province": "Madrid"
+  }
+}
+
+
+GET {{baseUrl}}/?userId=USER_ID_AQUI
+
+DELETE {{baseUrl}}
+Content-Type: application/json
+
+{
+  "userId": "USER_ID_AQUI"
+}
+
+
+POST {{baseUrl}}/refresh
+
+POST {{baseUrl}}/logout
+
+
+PUT {{baseUrl}}/password
+
+
+POST {{baseUrl}}/invite
