@@ -1,65 +1,97 @@
-@baseUrl = http://localhost:3000/api/user
-
-POST {{baseUrl}}/register
+### 1) Registro de usuario
+POST http://localhost:3000/api/user/register
 Content-Type: application/json
 
 {
-  "email": "fdefsef@test.com",
-  "password": "12345678",
+  "email": "prueba10000@example.com",
+  "password": "contrasenia123"
+}
+
+### 2) Validación de email
+PUT http://localhost:3000/api/user/validation
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YmVjMzVmNGIwN2FhNWMwZDlmNjA2NSIsImlhdCI6MTc3NDEwOTUzNSwiZXhwIjoxNzc0MTEwNDM1fQ.SdfbdyVp2MYQkyT43r6x-6PhalmsMxlChpg-NbDRs1o
+Content-Type: application/json
+
+{
+  "code": "285608"
+}
+
+### 3) Login
+POST http://localhost:3000/api/user/login
+Content-Type: application/json
+
+{
+  "email": "prueba10000@example.com",
+  "password": "contrasenia123"
+}
+
+### 4) Onboarding: datos personales
+PUT http://localhost:3000/api/user/register
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YmViYzc4MDlkNzBiYzYyNDhmYTM0YyIsImlhdCI6MTc3NDEwNzc2OCwiZXhwIjoxNzc0MTA4NjY4fQ.WQ-R3tbVi5bYQ9q73802SIhgLQwVuIEtinofNq5y5kg
+Content-Type: application/json
+
+{
+  "isFreelance": true,
   "name": "Juan",
-  "lastName": "Pérez"
+  "lastName": "Pérez",
+  "nif": "X1234567L"
 }
 
-PUT {{baseUrl}}/validation
+### 5) Onboarding: datos de compañía
+PATCH http://localhost:3000/api/user/company
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YmViYzc4MDlkNzBiYzYyNDhmYTM0YyIsImlhdCI6MTc3NDEwNzc2OCwiZXhwIjoxNzc0MTA4NjY4fQ.WQ-R3tbVi5bYQ9q73802SIhgLQwVuIEtinofNq5y5kg
 Content-Type: application/json
 
 {
-  "email": "fdefsef@test.com",
-  "code": "585909"
-}
-
-POST {{baseUrl}}/login
-Content-Type: application/json
-
-{
-  "email": "test@test.com",
-  "password": "12345678"
-}
-
-PUT {{baseUrl}}/register
-Content-Type: application/json
-
-{
-  "userId": "69be70eff6c24c6a5fb4d018",
-  "name": "Juan Updated",
-  "lastName": "Pérez Updated",
-  "nif": "12345678A",
+  "isFreelance": false,
+  "name": "Empresa Juan",
+  "lastName": "Pérez",
+  "cif": "X1234567L",
   "address": {
-    "street": "Calle Mayor",
-    "number": "1",
-    "postal": "28001",
+    "street": "Calle Falsa",
+    "number": "123",
+    "postal": "28000",
     "city": "Madrid",
     "province": "Madrid"
   }
 }
 
-
-GET {{baseUrl}}/?userId=USER_ID_AQUI
-
-DELETE {{baseUrl}}
+### 6) Obtener usuario
+GET http://localhost:3000/api/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YmViYTk2MDU3NjQzZTBmMTJhYTc1YSIsImlhdCI6MTc3NDEwNzMzNiwiZXhwIjoxNzc0MTA4MjM2fQ.4YHlHyZKG0kKaMYXJjLaR4YxLfUki4OTSlE2GGmeNC0
+### 7) Cambiar contraseña
+PUT http://localhost:3000/api/user/password
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YmVjMDNjZDhiMjdmMGVlMDA5YzhiYyIsImlhdCI6MTc3NDEwODczMiwiZXhwIjoxNzc0MTA5NjMyfQ.LlXMfiTHtqiBkMEJ7Du1NlRT1tPlowRr1KGCCqjCjUk
 Content-Type: application/json
 
 {
-  "userId": "USER_ID_AQUI"
+  "currentPassword": "contrasenia123",
+  "newPassword": "password456"
 }
 
+### 8) Invitar usuario
+POST http://localhost:3000/api/user/invite
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YmViYTk2MDU3NjQzZTBmMTJhYTc1YSIsImlhdCI6MTc3NDEwNzMzNiwiZXhwIjoxNzc0MTA4MjM2fQ.4YHlHyZKG0kKaMYXJjLaR4YxLfUki4OTSlE2GGmeNC0
+Content-Type: application/json
 
-POST {{baseUrl}}/refresh
+{
+  "email": "guest1@example.com",
+  "name": "Invitado",
+  "lastName": "Usuario"
+}
 
-POST {{baseUrl}}/logout
+### 9) Refresh token
+POST http://localhost:3000/api/user/refresh
+Content-Type: application/json
 
+{
+  "refreshToken": "6a73315696b88c53bd3ce8bf0d9db735d20fe3a1a5b9254a4209ab630e4ad58e96449a60dba297d984a5c52b025641c52c5e39e7a851cea83ca113f1370b5665"
+}
 
-PUT {{baseUrl}}/password
+### 10) Logout
+POST http://localhost:3000/api/user/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YmViYTk2MDU3NjQzZTBmMTJhYTc1YSIsImlhdCI6MTc3NDEwNzQ1MSwiZXhwIjoxNzc0MTA4MzUxfQ.PCavejuG7Xrpju2U_2s67XsrT30dsrtJrJUpKVv5CZ0
 
-
-POST {{baseUrl}}/invite
+### 11) Eliminar usuario (soft delete)
+DELETE http://localhost:3000/api/user?soft=true
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YmViYTk2MDU3NjQzZTBmMTJhYTc1YSIsImlhdCI6MTc3NDEwNzQ1MSwiZXhwIjoxNzc0MTA4MzUxfQ.PCavejuG7Xrpju2U_2s67XsrT30dsrtJrJUpKVv5CZ0

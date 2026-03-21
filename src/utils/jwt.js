@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { AppError } from './AppError.js';
-
+import crypto from 'crypto'
 
 export const generateToken = (userId) => 
 {

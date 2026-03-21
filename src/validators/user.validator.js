@@ -21,11 +21,9 @@ export const loginSchema = z.object({
 
 
 export const validateEmailSchema = z.object({
-  body: z.object({
     code: z.string()
       .regex(/^\d{6}$/, 'el codigo tieme que tener 6 dígitos')
   })
-});
 
 
 export const onboardingSchema = z.discriminatedUnion('isFreelance', [
@@ -58,11 +56,11 @@ export const onboardingSchema = z.discriminatedUnion('isFreelance', [
 
 export const passwordSchema = z.object({
   body: z.object({
-    currentPassword: z.string().min(8, 'contraseña min 8 caracteres'),
-    newPassword: z.string().min(8, 'contraseña min 8 caracteres')
-      .refine((val, ctr) => val !== ctr.parent.currentPassword, {
-        message: 'la nueva contraseña debe ser diferente'
-      })
+    currentPassword: z.string().min(8, 'contraseña mínima 8 caracteres'),
+    newPassword: z.string().min(8, 'contraseña mínima 8 caracteres')
+  }).refine(data => data.newPassword !== data.currentPassword, {
+    message: 'la nueva contraseña debe ser diferente',
+    path: ['newPassword'] // indica en qué campo se marca el error
   })
 });
 

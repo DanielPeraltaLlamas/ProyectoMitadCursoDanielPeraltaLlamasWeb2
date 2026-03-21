@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
 
 const addressSchema = new mongoose.Schema(
 {
@@ -34,14 +35,6 @@ userSchema.virtual('fullName').get(function()
   return `${this.name} ${this.lastName}`;
 });
 
-
-// metodo para hashear la contraseña antes de guardarlas, se comprueba si se ha cambiado la contraseña 
-userSchema.pre('save', async function(next) 
-{
-  if (!this.isModified('password')) return next();
-  this.password = await bcrypt.hash(this.password, 10);
-  next();
-});
 
 
 const User = mongoose.model('User',userSchema)

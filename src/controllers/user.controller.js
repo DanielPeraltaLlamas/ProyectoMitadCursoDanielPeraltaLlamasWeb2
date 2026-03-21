@@ -1,15 +1,18 @@
 import User from "../models/User.js";
 import Company from "../models/Company.js";
+import { encrypt,compare } from "../utils/handlePassword.js";
+import {generateToken,generateRefreshToken,verifyToken} from '../utils/jwt.js'
+import notificationService from '../services/notification.service.js';
+import { AppError } from "../utils/AppError.js";
 
 
 export const registerUser = async (req, res) => 
 {
     const { email, password} = req.body;
+    console.log(req.body)
     const existingUser = await User.findOne({ email });
     if (existingUser) { return res.status(400).json({ message: 'email ya registrado' });}
-
     const hashedPassword = await encrypt(password);
-
     const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
 
     const newUser = new User({
@@ -21,13 +24,15 @@ export const registerUser = async (req, res) =>
       verificationAttempts : 3
     });
 
+    
+
     const accessToken = generateToken(newUser._id);
     const refreshToken = generateRefreshToken();
 
     newUser.refreshToken = refreshToken;
     await newUser.save();
 
-    notificationEmitter.emit('user:registered', newUser);
+    notificationService.emit('user:registered', newUser);
 
     return res.status(201).json({
       user: {
@@ -36,7 +41,8 @@ export const registerUser = async (req, res) =>
         role: newUser.role
       },
       accessToken,
-      refreshToken
+      refreshToken,
+      verificationCode
     })
 
 
@@ -65,7 +71,7 @@ export const validateEmail = async (req, res,next) =>
     user.verificationAttempts = null;
     await user.save();
 
-    notificationEmitter.emit('user:verified', user);
+    notificationService.emit('user:verified', user);
 
     return res.status(200).json({ message: 'usuario verificado' });
     
@@ -73,13 +79,11 @@ export const validateEmail = async (req, res,next) =>
 
 }
 
-export const loginUser = async (req, res) => 
+export const loginUser = async (req, res,next) => 
 {
     const { email, password } = req.body;
     const user = await User.findOne({ email, deleted: false });
     if (!user) return res.status(404).json({ message: "Usuario no encontrado" });
-
-
     const contraseniasCoinciden = await compare(password, user.password);
     if (!contraseniasCoinciden) return next(new AppError(401, 'credenciales mal'));
 
@@ -177,10 +181,14 @@ export const getUser = async (req, res) =>
 
 }
 
-export const refreshToken = async (req, res) => 
+export const refreshToken = async (req, res,next) => 
 {
     const { refreshToken } = req.body;
+    console.log(refreshToken)
     const user = await User.findOne({ refreshToken });
+    if (!user) {
+      return next(new AppError(401, 'Refresh token inválido o usuario no encontrado'));
+    }
     const accessToken = generateToken(user._id);
     const newRefreshToken = generateRefreshToken();
     user.refreshToken = newRefreshToken;
@@ -213,18 +221,17 @@ export const deleteUser = async (req, res) =>
       await User.findByIdAndDelete(user._id);
     }
 
-    notificationEmitter.emit('user:deleted', user);
+    notificationService.emit('user:deleted', user);
 
     return res.status(200).json({ message: 'Usuario eliminado' });
 
 }
 
-export const changePassword = async (req, res) => 
+export const changePassword = async (req, res,next) => 
 {
     const { currentPassword, newPassword } = req.body;
-    const user = req.user;
-
-    const contraseniasCoinciden = await compare(password, user.password);
+    const user = await User.findById(req.user.id).select('+password');
+    const contraseniasCoinciden = await compare(currentPassword, user.password);
     if (!contraseniasCoinciden) return next(new AppError(401, 'credenciales mal'));
 
     user.password = await encrypt(newPassword);
@@ -233,7 +240,7 @@ export const changePassword = async (req, res) =>
     return res.status(200).json({ message: 'contraseña actualizada' });
 }
 
-export const inviteUser = async (req, res) => 
+export const inviteUser = async (req, res,next) => 
 {
     const { email, name, lastName } = req.body;
     const inviter = req.user;
@@ -259,7 +266,7 @@ export const inviteUser = async (req, res) =>
       verificationAttempts: 3
     });
 
-    notificationEmitter.emit('user:invited', newUser);
+    notificationService.emit('user:invited', newUser);
 
     return res.status(201).json({ message: 'usuario invitado', user: newUser });
 
