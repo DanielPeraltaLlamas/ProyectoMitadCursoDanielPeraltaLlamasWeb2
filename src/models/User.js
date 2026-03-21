@@ -29,6 +29,25 @@ const userSchema = new mongoose.Schema(
   toObject: { virtuals: true }
 });
 
+userSchema.virtual('fullName').get(function() 
+{
+  return `${this.name} ${this.lastName}`;
+});
+
+
+// metodo para hashear la contraseña antes de guardarlas, se comprueba si se ha cambiado la contraseña 
+userSchema.pre('save', async function(next) 
+{
+  if (!this.isModified('password')) return next();
+  this.password = await bcrypt.hash(this.password, 10);
+  next();
+});
+
+userSchema.methods.comparePassword = async function(candidatePassword) 
+{
+  return bcrypt.compare(candidatePassword, this.password);
+};
+
 const User = mongoose.model('User',userSchema)
 
 export default User

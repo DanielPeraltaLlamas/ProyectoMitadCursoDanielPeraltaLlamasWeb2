@@ -1,9 +1,13 @@
 import express from "express";
 import dbConnect from './config/db.js';
 import userRouter from "./routes/user.routes.js";
+import helmet from "helmet";
+
 
 const app = express();
 
+
+app.use(helmet());
 app.use(express.json());
 
 app.get('/health', (req, res) => 
