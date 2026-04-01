@@ -168,8 +168,35 @@ export const updateCompanyData = async (req, res) =>
 
 }
 
-export const uploadLogo = async (req, res) => 
+export const uploadLogo = async (req, res,next) => 
 {
+  const user = req.user;
+  if (!user.company) 
+  {
+    return next(new AppError(400, 'El usuario no tiene compañía'));
+  }
+
+  if (!req.file) 
+  {
+    return next(new AppError(400, 'No se ha subido ningún archivo'));
+  }
+
+  const company = await Company.findById(user.company);
+
+  if (!company) 
+  {
+    return next(new AppError(404, 'Compañía no encontrada'));
+  }
+
+  const url = `http://localhost:3000/uploads/${req.file.filename}`;
+
+  company.logo = url;
+  await company.save();
+
+  return res.status(200).json({
+    message: 'Logo subido correctamente',
+    logo: url
+  });
 
 }
 

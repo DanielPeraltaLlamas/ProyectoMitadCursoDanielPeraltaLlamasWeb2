@@ -3,17 +3,17 @@ POST http://localhost:3000/api/user/register
 Content-Type: application/json
 
 {
-  "email": "prueba53@example.com",
+  "email": "prueba57@example.com",
   "password": "contrasenia123"
 }
 
 ### 2) Validación de email
 PUT http://localhost:3000/api/user/validation
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2QzN2ZiMGM0NGIxYzVlY2I0ZWFiYiIsImlhdCI6MTc3NTA1Njg5MSwiZXhwIjoxNzc1MDU3NzkxfQ.6WcwrmiZKnnqTiiJoVg-4wixsNbkojpjvmcp23PC0Qo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2Q0MWFhZDc1YjQyZTllYmM5ZjNjMSIsImlhdCI6MTc3NTA1OTM3MCwiZXhwIjoxNzc1MDYwMjcwfQ.NpEA8Gis-t7dzowrU7zfYP_HPNehIT6gVxBjHYYyZew
 Content-Type: application/json
 
 {
-  "code": "468084"
+  "code": "883038"
 }
 
 ### 3) Login
@@ -21,13 +21,13 @@ POST http://localhost:3000/api/user/login
 Content-Type: application/json
 
 {
-  "email": "prueba50@example.com",
+  "email": "prueba56@example.com",
   "password": "contrasenia123"
 }
 
 ### 4) Onboarding: datos personales
 PUT http://localhost:3000/api/user/register
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2QzOTMwMGM0NGIxYzVlY2I0ZWFkZiIsImlhdCI6MTc3NTA1NzIwMCwiZXhwIjoxNzc1MDU4MTAwfQ.xWmCZoY9EmCZDA4OBpBtnD02CxLOY4WveKrSzq6ixlU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2Q0MWFhZDc1YjQyZTllYmM5ZjNjMSIsImlhdCI6MTc3NTA1OTM3MCwiZXhwIjoxNzc1MDYwMjcwfQ.NpEA8Gis-t7dzowrU7zfYP_HPNehIT6gVxBjHYYyZew
 Content-Type: application/json
 
 {
@@ -39,14 +39,14 @@ Content-Type: application/json
 
 ### 5) Onboarding: datos de compañía
 PATCH http://localhost:3000/api/user/company
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2QzN2ZiMGM0NGIxYzVlY2I0ZWFiYiIsImlhdCI6MTc3NTA1NzAzNywiZXhwIjoxNzc1MDU3OTM3fQ.23m6ATShkFOsvzfcEpQWXLCySnBqGw70bcTUgQCRbAo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2Q0NjkwNGQxMTk2ZDVhNjI2N2MyNyIsImlhdCI6MTc3NTA2MDYyNCwiZXhwIjoxNzc1MDYxNTI0fQ.0KD4n9FIK8MSTI6Jee2qcRIpQqEgXqK3KVh8phNOm1M
 Content-Type: application/json
 
 {
   "isFreelance": false,
   "name": "Empresa Juan",
   "lastName": "Pérez",
-  "cif": "X1234567L",
+  "cif": "X1234567M",
   "address": {
     "street": "Calle Falsa",
     "number": "123",
@@ -58,10 +58,10 @@ Content-Type: application/json
 
 ### 6) Obtener usuario
 GET http://localhost:3000/api/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2QzOTMwMGM0NGIxYzVlY2I0ZWFkZiIsImlhdCI6MTc3NTA1NzIwMCwiZXhwIjoxNzc1MDU4MTAwfQ.xWmCZoY9EmCZDA4OBpBtnD02CxLOY4WveKrSzq6ixlU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2Q0MWFhZDc1YjQyZTllYmM5ZjNjMSIsImlhdCI6MTc3NTA1OTM3MCwiZXhwIjoxNzc1MDYwMjcwfQ.NpEA8Gis-t7dzowrU7zfYP_HPNehIT6gVxBjHYYyZew
 ### 7) Cambiar contraseña
 PUT http://localhost:3000/api/user/password
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2QzN2ZiMGM0NGIxYzVlY2I0ZWFiYiIsImlhdCI6MTc3NTA1NzAzNywiZXhwIjoxNzc1MDU3OTM3fQ.23m6ATShkFOsvzfcEpQWXLCySnBqGw70bcTUgQCRbAo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2Q0MWFhZDc1YjQyZTllYmM5ZjNjMSIsImlhdCI6MTc3NTA1OTM3MCwiZXhwIjoxNzc1MDYwMjcwfQ.NpEA8Gis-t7dzowrU7zfYP_HPNehIT6gVxBjHYYyZew
 Content-Type: application/json
 
 {
@@ -71,11 +71,11 @@ Content-Type: application/json
 
 ### 8) Invitar usuario
 POST http://localhost:3000/api/user/invite
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2QzOTMwMGM0NGIxYzVlY2I0ZWFkZiIsImlhdCI6MTc3NTA1NzIwMCwiZXhwIjoxNzc1MDU4MTAwfQ.xWmCZoY9EmCZDA4OBpBtnD02CxLOY4WveKrSzq6ixlU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2Q0MWFhZDc1YjQyZTllYmM5ZjNjMSIsImlhdCI6MTc3NTA1OTM3MCwiZXhwIjoxNzc1MDYwMjcwfQ.NpEA8Gis-t7dzowrU7zfYP_HPNehIT6gVxBjHYYyZew
 Content-Type: application/json
 
 {
-  "email": "guest2@example.com",
+  "email": "guest3@example.com",
   "name": "Invitado",
   "lastName": "Usuario"
 }
@@ -95,3 +95,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2QzOTMwM
 ### 11) Eliminar usuario (soft delete)
 DELETE http://localhost:3000/api/user?soft=true
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YmViYTk2MDU3NjQzZTBmMTJhYTc1YSIsImlhdCI6MTc3NDEwNzQ1MSwiZXhwIjoxNzc0MTA4MzUxfQ.PCavejuG7Xrpju2U_2s67XsrT30dsrtJrJUpKVv5CZ0
+
+
