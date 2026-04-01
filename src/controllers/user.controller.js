@@ -48,7 +48,6 @@ export const registerUser = async (req, res) =>
 
 }
 
-//añado next ya que es tecinamente un validate y quiero redirigir los errores a AppError
 export const validateEmail = async (req, res,next) => 
 {
     const user = req.user;
@@ -184,9 +183,9 @@ export const getUser = async (req, res) =>
 export const refreshToken = async (req, res,next) => 
 {
     const { refreshToken } = req.body;
-    console.log(refreshToken)
     const user = await User.findOne({ refreshToken });
-    if (!user) {
+    if (!user) 
+    {
       return next(new AppError(401, 'Refresh token inválido o usuario no encontrado'));
     }
     const accessToken = generateToken(user._id);

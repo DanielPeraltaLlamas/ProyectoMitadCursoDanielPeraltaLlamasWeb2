@@ -3,17 +3,17 @@ POST http://localhost:3000/api/user/register
 Content-Type: application/json
 
 {
-  "email": "prueba10000@example.com",
+  "email": "prueba53@example.com",
   "password": "contrasenia123"
 }
 
 ### 2) Validación de email
 PUT http://localhost:3000/api/user/validation
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YmVjMzVmNGIwN2FhNWMwZDlmNjA2NSIsImlhdCI6MTc3NDEwOTUzNSwiZXhwIjoxNzc0MTEwNDM1fQ.SdfbdyVp2MYQkyT43r6x-6PhalmsMxlChpg-NbDRs1o
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2QzN2ZiMGM0NGIxYzVlY2I0ZWFiYiIsImlhdCI6MTc3NTA1Njg5MSwiZXhwIjoxNzc1MDU3NzkxfQ.6WcwrmiZKnnqTiiJoVg-4wixsNbkojpjvmcp23PC0Qo
 Content-Type: application/json
 
 {
-  "code": "285608"
+  "code": "468084"
 }
 
 ### 3) Login
@@ -21,13 +21,13 @@ POST http://localhost:3000/api/user/login
 Content-Type: application/json
 
 {
-  "email": "prueba10000@example.com",
+  "email": "prueba50@example.com",
   "password": "contrasenia123"
 }
 
 ### 4) Onboarding: datos personales
 PUT http://localhost:3000/api/user/register
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YmViYzc4MDlkNzBiYzYyNDhmYTM0YyIsImlhdCI6MTc3NDEwNzc2OCwiZXhwIjoxNzc0MTA4NjY4fQ.WQ-R3tbVi5bYQ9q73802SIhgLQwVuIEtinofNq5y5kg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2QzOTMwMGM0NGIxYzVlY2I0ZWFkZiIsImlhdCI6MTc3NTA1NzIwMCwiZXhwIjoxNzc1MDU4MTAwfQ.xWmCZoY9EmCZDA4OBpBtnD02CxLOY4WveKrSzq6ixlU
 Content-Type: application/json
 
 {
@@ -39,7 +39,7 @@ Content-Type: application/json
 
 ### 5) Onboarding: datos de compañía
 PATCH http://localhost:3000/api/user/company
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YmViYzc4MDlkNzBiYzYyNDhmYTM0YyIsImlhdCI6MTc3NDEwNzc2OCwiZXhwIjoxNzc0MTA4NjY4fQ.WQ-R3tbVi5bYQ9q73802SIhgLQwVuIEtinofNq5y5kg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2QzN2ZiMGM0NGIxYzVlY2I0ZWFiYiIsImlhdCI6MTc3NTA1NzAzNywiZXhwIjoxNzc1MDU3OTM3fQ.23m6ATShkFOsvzfcEpQWXLCySnBqGw70bcTUgQCRbAo
 Content-Type: application/json
 
 {
@@ -58,10 +58,10 @@ Content-Type: application/json
 
 ### 6) Obtener usuario
 GET http://localhost:3000/api/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YmViYTk2MDU3NjQzZTBmMTJhYTc1YSIsImlhdCI6MTc3NDEwNzMzNiwiZXhwIjoxNzc0MTA4MjM2fQ.4YHlHyZKG0kKaMYXJjLaR4YxLfUki4OTSlE2GGmeNC0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2QzOTMwMGM0NGIxYzVlY2I0ZWFkZiIsImlhdCI6MTc3NTA1NzIwMCwiZXhwIjoxNzc1MDU4MTAwfQ.xWmCZoY9EmCZDA4OBpBtnD02CxLOY4WveKrSzq6ixlU
 ### 7) Cambiar contraseña
 PUT http://localhost:3000/api/user/password
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YmVjMDNjZDhiMjdmMGVlMDA5YzhiYyIsImlhdCI6MTc3NDEwODczMiwiZXhwIjoxNzc0MTA5NjMyfQ.LlXMfiTHtqiBkMEJ7Du1NlRT1tPlowRr1KGCCqjCjUk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2QzN2ZiMGM0NGIxYzVlY2I0ZWFiYiIsImlhdCI6MTc3NTA1NzAzNywiZXhwIjoxNzc1MDU3OTM3fQ.23m6ATShkFOsvzfcEpQWXLCySnBqGw70bcTUgQCRbAo
 Content-Type: application/json
 
 {
@@ -71,11 +71,11 @@ Content-Type: application/json
 
 ### 8) Invitar usuario
 POST http://localhost:3000/api/user/invite
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YmViYTk2MDU3NjQzZTBmMTJhYTc1YSIsImlhdCI6MTc3NDEwNzMzNiwiZXhwIjoxNzc0MTA4MjM2fQ.4YHlHyZKG0kKaMYXJjLaR4YxLfUki4OTSlE2GGmeNC0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2QzOTMwMGM0NGIxYzVlY2I0ZWFkZiIsImlhdCI6MTc3NTA1NzIwMCwiZXhwIjoxNzc1MDU4MTAwfQ.xWmCZoY9EmCZDA4OBpBtnD02CxLOY4WveKrSzq6ixlU
 Content-Type: application/json
 
 {
-  "email": "guest1@example.com",
+  "email": "guest2@example.com",
   "name": "Invitado",
   "lastName": "Usuario"
 }
@@ -85,12 +85,12 @@ POST http://localhost:3000/api/user/refresh
 Content-Type: application/json
 
 {
-  "refreshToken": "6a73315696b88c53bd3ce8bf0d9db735d20fe3a1a5b9254a4209ab630e4ad58e96449a60dba297d984a5c52b025641c52c5e39e7a851cea83ca113f1370b5665"
+  "refreshToken": "544b0c04e2841e30b97f55b37a3637d33edf1c105e5eb3ef4e9a043f7a25241c9042726201ae7bd6317539663da58378b400739b08eedad8ff81d70936824e5a"
 }
 
 ### 10) Logout
 POST http://localhost:3000/api/user/logout
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YmViYTk2MDU3NjQzZTBmMTJhYTc1YSIsImlhdCI6MTc3NDEwNzQ1MSwiZXhwIjoxNzc0MTA4MzUxfQ.PCavejuG7Xrpju2U_2s67XsrT30dsrtJrJUpKVv5CZ0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2QzOTMwMGM0NGIxYzVlY2I0ZWFkZiIsImlhdCI6MTc3NTA1NzIwMCwiZXhwIjoxNzc1MDU4MTAwfQ.xWmCZoY9EmCZDA4OBpBtnD02CxLOY4WveKrSzq6ixlU
 
 ### 11) Eliminar usuario (soft delete)
 DELETE http://localhost:3000/api/user?soft=true

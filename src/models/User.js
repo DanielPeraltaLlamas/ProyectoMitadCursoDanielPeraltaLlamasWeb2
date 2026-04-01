@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema(
   company: { type: mongoose.Schema.Types.ObjectId, ref: 'Company', index: true },
   address: { type: addressSchema },
   deleted: { type: Boolean, default: false },
+  refreshToken: { type: String },
 }, {
   timestamps: true,
   toJSON: { virtuals: true },
