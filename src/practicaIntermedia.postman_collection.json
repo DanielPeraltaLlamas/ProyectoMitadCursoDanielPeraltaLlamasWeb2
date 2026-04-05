@@ -1,0 +1,49 @@
+{
+  "info": {
+    "_postman_id": "2a4f2f66-c2fd-42f8-b0fe-c6f87cc042c8",
+    "name": "practicaIntermedia",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51927196",
+    "_collection_link": "https://go.postman.co/collection/51927196-2a4f2f66-c2fd-42f8-b0fe-c6f87cc042c8?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Logo",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZDI2NjU1ZjQ5ODIzMjNmNzVhM2U0NSIsImlhdCI6MTc3NTM5NjQzNywiZXhwIjoxNzc1Mzk3MzM3fQ.7FFKICiCv40fYfpcfBjU4mUTjVC1YR4i7SIrz8UPhm8",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "logo",
+              "type": "file",
+              "uuid": "8a764a3c-642f-4ff9-9d9a-cb6db9afccb8",
+              "src": "postman-cloud:///1f110aa3-5473-45a0-944e-89bbdcec2c18"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/user/logo",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "user",
+            "logo"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

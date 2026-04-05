@@ -27,7 +27,6 @@ export const validateEmailSchema = z.object({
 
 
 export const onboardingSchema = z.discriminatedUnion('isFreelance', [
-  //freelance
   z.object({
     isFreelance: z.literal(true),
     name: z.string().min(2, 'nombre con minimo 2 caracteres').trim(),
@@ -36,7 +35,6 @@ export const onboardingSchema = z.discriminatedUnion('isFreelance', [
       .regex(/^[A-Z0-9]{5,}$/i, 'NIF invalido')
       .refine(val => val.length >= 5, { message: 'nif minimo 5 caracteres' })
   }),
-  //empresa
   z.object({
     isFreelance: z.literal(false),
     name: z.string().min(2, 'nombre con minimo 2 caracteres').trim(),
@@ -60,7 +58,7 @@ export const passwordSchema = z.object({
     newPassword: z.string().min(8, 'contraseña mínima 8 caracteres')
   }).refine(data => data.newPassword !== data.currentPassword, {
     message: 'la nueva contraseña debe ser diferente',
-    path: ['newPassword'] // indica en qué campo se marca el error
+    path: ['newPassword']
   })
 });
 

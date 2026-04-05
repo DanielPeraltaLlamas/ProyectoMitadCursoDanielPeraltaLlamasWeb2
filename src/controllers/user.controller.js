@@ -9,7 +9,6 @@ import { AppError } from "../utils/AppError.js";
 export const registerUser = async (req, res) => 
 {
     const { email, password} = req.body;
-    console.log(req.body)
     const existingUser = await User.findOne({ email });
     if (existingUser) { return res.status(400).json({ message: 'email ya registrado' });}
     const hashedPassword = await encrypt(password);
@@ -277,7 +276,7 @@ export const inviteUser = async (req, res,next) =>
     if (existeUser) return next(new AppError(409, 'email ya existe'));
 
     const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
-    //contrasenia aletorio temporal
+    
     const password = await encrypt(Math.random().toString(36).slice(-8));
 
     const newUser = await User.create({

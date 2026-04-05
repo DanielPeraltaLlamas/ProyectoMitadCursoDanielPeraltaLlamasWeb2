@@ -3,17 +3,17 @@ POST http://localhost:3000/api/user/register
 Content-Type: application/json
 
 {
-  "email": "prueba57@example.com",
-  "password": "contrasenia123"
+  "email": "prueba40@example.com",
+  "password": "contrasenia1234"
 }
 
 ### 2) Validación de email
 PUT http://localhost:3000/api/user/validation
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2Q0MWFhZDc1YjQyZTllYmM5ZjNjMSIsImlhdCI6MTc3NTA1OTM3MCwiZXhwIjoxNzc1MDYwMjcwfQ.NpEA8Gis-t7dzowrU7zfYP_HPNehIT6gVxBjHYYyZew
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZDI2NGJhNDRmNWY2MWNlMjNmODEzMSIsImlhdCI6MTc3NTM5NjAyNiwiZXhwIjoxNzc1Mzk2OTI2fQ.B0B1Eis9AkloFSLfmx3v8tw41jHqbaVU3-TVOPtaj6Q
 Content-Type: application/json
 
 {
-  "code": "883038"
+  "code": "119628"
 }
 
 ### 3) Login
@@ -21,13 +21,13 @@ POST http://localhost:3000/api/user/login
 Content-Type: application/json
 
 {
-  "email": "prueba56@example.com",
+  "email": "prueba38@example.com",
   "password": "contrasenia123"
 }
 
 ### 4) Onboarding: datos personales
 PUT http://localhost:3000/api/user/register
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2Q0MWFhZDc1YjQyZTllYmM5ZjNjMSIsImlhdCI6MTc3NTA1OTM3MCwiZXhwIjoxNzc1MDYwMjcwfQ.NpEA8Gis-t7dzowrU7zfYP_HPNehIT6gVxBjHYYyZew
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZDI2NGJhNDRmNWY2MWNlMjNmODEzMSIsImlhdCI6MTc3NTM5NjAyNiwiZXhwIjoxNzc1Mzk2OTI2fQ.B0B1Eis9AkloFSLfmx3v8tw41jHqbaVU3-TVOPtaj6Q
 Content-Type: application/json
 
 {
@@ -39,7 +39,7 @@ Content-Type: application/json
 
 ### 5) Onboarding: datos de compañía
 PATCH http://localhost:3000/api/user/company
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2Q0NjkwNGQxMTk2ZDVhNjI2N2MyNyIsImlhdCI6MTc3NTA2MDYyNCwiZXhwIjoxNzc1MDYxNTI0fQ.0KD4n9FIK8MSTI6Jee2qcRIpQqEgXqK3KVh8phNOm1M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZDI2NjU1ZjQ5ODIzMjNmNzVhM2U0NSIsImlhdCI6MTc3NTM5NjQzNywiZXhwIjoxNzc1Mzk3MzM3fQ.7FFKICiCv40fYfpcfBjU4mUTjVC1YR4i7SIrz8UPhm8
 Content-Type: application/json
 
 {
@@ -58,24 +58,24 @@ Content-Type: application/json
 
 ### 6) Obtener usuario
 GET http://localhost:3000/api/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2Q0MWFhZDc1YjQyZTllYmM5ZjNjMSIsImlhdCI6MTc3NTA1OTM3MCwiZXhwIjoxNzc1MDYwMjcwfQ.NpEA8Gis-t7dzowrU7zfYP_HPNehIT6gVxBjHYYyZew
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZDI2NTkyZjQ5ODIzMjNmNzVhM2UzNCIsImlhdCI6MTc3NTM5NjI0MiwiZXhwIjoxNzc1Mzk3MTQyfQ.XYUauc2PE5NMiwXUSyPLGyRGxCmHrmGOIYcv7HM5scc
 ### 7) Cambiar contraseña
 PUT http://localhost:3000/api/user/password
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2Q0MWFhZDc1YjQyZTllYmM5ZjNjMSIsImlhdCI6MTc3NTA1OTM3MCwiZXhwIjoxNzc1MDYwMjcwfQ.NpEA8Gis-t7dzowrU7zfYP_HPNehIT6gVxBjHYYyZew
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZDI2NTkyZjQ5ODIzMjNmNzVhM2UzNCIsImlhdCI6MTc3NTM5NjI0MiwiZXhwIjoxNzc1Mzk3MTQyfQ.XYUauc2PE5NMiwXUSyPLGyRGxCmHrmGOIYcv7HM5scc
 Content-Type: application/json
 
 {
-  "currentPassword": "contrasenia123",
+  "currentPassword": "contrasenia1234",
   "newPassword": "password456"
 }
 
 ### 8) Invitar usuario
 POST http://localhost:3000/api/user/invite
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2Q0MWFhZDc1YjQyZTllYmM5ZjNjMSIsImlhdCI6MTc3NTA1OTM3MCwiZXhwIjoxNzc1MDYwMjcwfQ.NpEA8Gis-t7dzowrU7zfYP_HPNehIT6gVxBjHYYyZew
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZDI2NTkyZjQ5ODIzMjNmNzVhM2UzNCIsImlhdCI6MTc3NTM5NjI0MiwiZXhwIjoxNzc1Mzk3MTQyfQ.XYUauc2PE5NMiwXUSyPLGyRGxCmHrmGOIYcv7HM5scc
 Content-Type: application/json
 
 {
-  "email": "guest3@example.com",
+  "email": "guest4@example.com",
   "name": "Invitado",
   "lastName": "Usuario"
 }
@@ -85,7 +85,7 @@ POST http://localhost:3000/api/user/refresh
 Content-Type: application/json
 
 {
-  "refreshToken": "544b0c04e2841e30b97f55b37a3637d33edf1c105e5eb3ef4e9a043f7a25241c9042726201ae7bd6317539663da58378b400739b08eedad8ff81d70936824e5a"
+  "refreshToken": "349c1214f33b6e0e640aea610ef2d644fe3a7d1fc55d32639eba352f31c89607e83a05a87cd75e45ceb021d878d7455f4b07c9cb9b47bc57883917f44d44f0d2"
 }
 
 ### 10) Logout

@@ -15,7 +15,6 @@ app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
-//app.use(mongoSanitize())
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
