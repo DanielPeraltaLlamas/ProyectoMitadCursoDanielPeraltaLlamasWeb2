@@ -7,12 +7,19 @@ import rateLimit from 'express-rate-limit';
 import mongoSanitize from 'express-mongo-sanitize';
 import path from 'node:path'
 import { errorHandler, notFoundHandler } from './middleware/error-handler.js';
+import morganBody from 'morgan-body';
+import { loggerStream } from './utils/handleLogger.js';
 
 const app = express();
 
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+morganBody(app, {
+  noColors: true,
+  skip: (req, res) => res.statusCode < 400,
+  stream: loggerStream
+});
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
 

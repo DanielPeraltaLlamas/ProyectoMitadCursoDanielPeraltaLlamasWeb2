@@ -4,6 +4,7 @@ import { encrypt,compare } from "../utils/handlePassword.js";
 import {generateToken,generateRefreshToken,verifyToken} from '../utils/jwt.js'
 import notificationService from '../services/notification.service.js';
 import { AppError } from "../utils/AppError.js";
+import { sendSlackNotification } from '../utils/handleLogger.js';
 
 
 export const registerUser = async (req, res) => 
@@ -30,6 +31,9 @@ export const registerUser = async (req, res) =>
 
     newUser.refreshToken = refreshToken;
     await newUser.save();
+    await sendSlackNotification(
+  `Nuevo usuario registrado\n Email: ${newUser.email}\n Role: ${newUser.role}`
+  );
 
     notificationService.emit('user:registered', newUser);
 

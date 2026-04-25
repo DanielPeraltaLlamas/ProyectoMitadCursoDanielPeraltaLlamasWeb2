@@ -1,3 +1,5 @@
+import { sendSlackNotification } from '../utils/handleLogger.js';
+
 export class ApiError extends Error {
   constructor(statusCode, message, details = null) {
     super(message);
@@ -30,4 +32,14 @@ export const errorHandler = (err, req, res, next) =>
     error: 'Error interno del servidor',
     ...(isDev && { stack: err.stack, message: err.message })
   });
+};
+
+
+export const criticalOperation = async (req, res) => {
+  try {
+    await sendSlackNotification('Operación crítica completada');
+  } catch (error) {
+    await sendSlackNotification(`Error crítico: ${error.message}`);
+    throw error;
+  }
 };
