@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { softDeletePlugin } from '../plugins/softDelete.plugin.js';
 
 const workerSchema = new mongoose.Schema({
   name: { type: String, trim: true },
@@ -25,5 +26,7 @@ const deliveryNoteSchema = new mongoose.Schema({
 
   deleted: { type: Boolean, default: false }
 }, { timestamps: true });
+
+clientSchema.plugin(softDeletePlugin)
 
 export default mongoose.model('DeliveryNote', deliveryNoteSchema);

@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
-
-
-import mongoose from "mongoose";
+import { softDeletePlugin } from '../plugins/softDelete.plugin.js';
 
 const addressSchema = new mongoose.Schema({
   street: { type: String, trim: true },
@@ -21,6 +19,8 @@ const clientSchema = new mongoose.Schema({
   address: addressSchema,
   deleted: { type: Boolean, default: false }
 }, { timestamps: true });
+
+clientSchema.plugin(softDeletePlugin)
 
 const Client = mongoose.model('Client', clientSchema);
 
