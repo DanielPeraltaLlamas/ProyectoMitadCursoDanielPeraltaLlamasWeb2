@@ -165,21 +165,17 @@ export const getArchivedProjects = async (req, res) =>
   res.json({ data: projects });
 };
 
-export const restoreProject = async (req, res) => 
-{
-  const project = await Project.findOne
-  ({
-    _id: req.params.id,
-    company: req.user.company
-  });
+export const restoreProject = async (req, res) => {
+  const { id } = req.params;
 
-  if (!project) 
-  {
+  const project = await Project.restoreById(id);
+
+  if (!project) {
     throw AppError.notFound("Proyecto no encontrado");
   }
 
-  await project.restore();
-
-  res.json({ message: "Proyecto restaurado", project });
+  res.json({
+    message: "Proyecto restaurado",
+    project
+  });
 };
-

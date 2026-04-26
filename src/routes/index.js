@@ -12,4 +12,4 @@ router.use("/client", clientRoutes);
 router.use("/project", projectRoutes);
 router.use("/deliverynote", deliverynoteRoutes);
 
-export default router;
+export default router; 
