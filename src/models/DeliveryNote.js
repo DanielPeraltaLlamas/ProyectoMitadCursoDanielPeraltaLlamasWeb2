@@ -27,6 +27,6 @@ const deliveryNoteSchema = new mongoose.Schema({
   deleted: { type: Boolean, default: false }
 }, { timestamps: true });
 
-clientSchema.plugin(softDeletePlugin)
+deliveryNoteSchema.plugin(softDeletePlugin)
 
 export default mongoose.model('DeliveryNote', deliveryNoteSchema);

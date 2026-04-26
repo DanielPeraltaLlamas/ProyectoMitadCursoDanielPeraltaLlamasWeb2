@@ -5,7 +5,7 @@ import Client from "../models/Client.js";
 
 
 
-export const createUser = async(req,res) =>
+export const createClient = async(req,res) =>
 {
     const { name, cif, email, phone, address } = req.body;
     const existing = await Client.findOne
@@ -61,7 +61,7 @@ export const updateClient = async(req,res)=>
     res.json(client);
 }
 
-export const getAllClients = async(req,res)=>
+export const getClients = async(req,res)=>
 {
     const
     {
@@ -99,7 +99,7 @@ export const getAllClients = async(req,res)=>
     });
 }
 
-export const getClientId = async(req,res)=>
+export const getClientById = async(req,res)=>
 {
     const {id} = req.params
 
@@ -117,7 +117,7 @@ export const getClientId = async(req,res)=>
     res.json(client)
 }
 
-export const deleteUser = async(req,res) =>
+export const deleteClient = async(req,res) =>
 {
     const {deleteMethod} = req.query
     const {id} = req.params
@@ -176,22 +176,14 @@ export const restoreClient = async (req, res) =>
 {
   const { id } = req.params;
 
-  const client = await Client.findOne
-  ({
-        _id: id,
-        company: req.user.company
-  });
+  const client = await Client.restoreById(id);
 
-  if (!client) 
-  {
-        throw AppError.notFound("Cliente no encontrado");
+  if (!client) {
+    throw AppError.notFound("Cliente no encontrado");
   }
 
-  await client.restore();
-
-  res.json
-  ({
-        message: "Cliente restaurado correctamente",
-        client
+  res.json({
+    message: "Cliente restaurado correctamente",
+    client
   });
 };

@@ -3,7 +3,7 @@ POST http://localhost:3000/api/user/register
 Content-Type: application/json
 
 {
-  "email": "prueba44@example.com",
+  "email": "prueba49@example.com",
   "password": "contrasenia1234"
 }
 
@@ -39,14 +39,14 @@ Content-Type: application/json
 
 ### 5) Onboarding: datos de compañía
 PATCH http://localhost:3000/api/user/company
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZDI2NjU1ZjQ5ODIzMjNmNzVhM2U0NSIsImlhdCI6MTc3NTM5NjQzNywiZXhwIjoxNzc1Mzk3MzM3fQ.7FFKICiCv40fYfpcfBjU4mUTjVC1YR4i7SIrz8UPhm8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWUwYTI2MjczZGI4Y2UzN2UwNTNiOCIsImlhdCI6MTc3NzIwNzg0NiwiZXhwIjoxNzc3MjA4NzQ2fQ.cvQ0TuwYxEVa9W0_6hRnvOud50cNaVJaLPukaMZiZnI
 Content-Type: application/json
 
 {
   "isFreelance": false,
   "name": "Empresa Juan",
   "lastName": "Pérez",
-  "cif": "X1234567M",
+  "cif": "X12345673",
   "address": {
     "street": "Calle Falsa",
     "number": "123",

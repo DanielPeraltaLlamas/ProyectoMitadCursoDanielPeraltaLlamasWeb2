@@ -94,8 +94,6 @@ export const getProjects = async (req, res) =>
   });
 };
 
-import Project from "../models/Project.js";
-import { AppError } from "../utils/AppError.js";
 
 export const deleteProject = async (req, res) => {
   const { id } = req.params;

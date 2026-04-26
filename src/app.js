@@ -1,6 +1,5 @@
 import express from "express";
 import dbConnect from './config/db.js';
-import userRouter from "./routes/user.routes.js";
 import helmet from "helmet";
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
@@ -9,6 +8,7 @@ import path from 'node:path'
 import { errorHandler, notFoundHandler } from './middleware/error-handler.js';
 import morganBody from 'morgan-body';
 import { loggerStream } from './utils/handleLogger.js';
+import routes from "./routes/index.js";
 
 const app = express();
 
@@ -34,7 +34,7 @@ app.get('/health', (req, res) =>
   res.json({ status: 'ok' });
 });
 
-app.use("/api/user", userRouter);
+app.use("/api", routes);
 app.use(notFoundHandler);
 app.use(errorHandler);
 

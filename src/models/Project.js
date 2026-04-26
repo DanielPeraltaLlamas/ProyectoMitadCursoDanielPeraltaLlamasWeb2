@@ -22,7 +22,7 @@ const projectSchema = new mongoose.Schema({
   deleted: { type: Boolean, default: false }
 }, { timestamps: true });
 
-clientSchema.plugin(softDeletePlugin)
+projectSchema.plugin(softDeletePlugin)
 
 const Project = mongoose.model('Project', projectSchema);
 
