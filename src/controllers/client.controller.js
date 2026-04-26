@@ -2,7 +2,7 @@ import User from "../models/User.js";
 import Company from "../models/Company.js";
 import { AppError } from "../utils/AppError.js";
 import Client from "../models/Client.js";
-import { deleteModel } from "mongoose";
+
 
 
 export const createUser = async(req,res) =>
@@ -133,7 +133,7 @@ export const deleteUser = async(req,res) =>
         throw AppError.notFound("No existe un client con ese ID")
     }
 
-    if(deleteMethod=="soft")
+    if(deleteMethod=="true")
     {
         await client.softDelete(req.user.id);
 
@@ -143,7 +143,7 @@ export const deleteUser = async(req,res) =>
             client
         });
     }
-    else if(deleteMethod=="hard")
+    else if(deleteMethod=="false")
     {
         await Client.hardDelete(id);
 
