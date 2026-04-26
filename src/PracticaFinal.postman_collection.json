@@ -1,0 +1,658 @@
+{
+  "info": {
+    "_postman_id": "d35edff0-6883-45e4-b557-4e222695a0ba",
+    "name": "PracticaFinal",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51927196",
+    "_collection_link": "https://go.postman.co/collection/51927196-d35edff0-6883-45e4-b557-4e222695a0ba?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Client",
+      "item": [
+        {
+          "name": "CreateClient",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWUyYWVlZjEyOWVlZjExOTc0YjkyOSIsImlhdCI6MTc3NzIxNjIzOCwiZXhwIjoxNzc3MjE3MTM4fQ.ZD_vMd7nCxAXFPl1Dok-HvNJAL3C-ORcty4G-qJ67A0",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Cliente Ejemplo delivery\",\n  \"email\": \"cliente2@ejemplo.com\",\n  \"cif\":\"X12345612\",\n  \"phone\": \"600123452\",\n  \"address\": {\n    \"street\": \"Calle Mayor\",\n    \"number\": \"15\",\n    \"postal\": \"28013\",\n    \"city\": \"Madrid\",\n    \"province\": \"Madrid\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/client",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "client"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetClients",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWUxNzEzNGRkMGMxZjVjNTQzNzIzNiIsImlhdCI6MTc3NzIxMTE1NSwiZXhwIjoxNzc3MjEyMDU1fQ.tIu4K364amGu859ISSVjRc1gPpI6ziL55qP0ij30-dA",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/client",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "client"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getArchivedClients",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWUwYTI2MjczZGI4Y2UzN2UwNTNiOCIsImlhdCI6MTc3NzIwNzg0NiwiZXhwIjoxNzc3MjA4NzQ2fQ.cvQ0TuwYxEVa9W0_6hRnvOud50cNaVJaLPukaMZiZnI",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/client/archived",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "client",
+                "archived"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getClientById",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWUwNWEyMjczZGI4Y2UzN2UwNTM4ZiIsImlhdCI6MTc3NzIwNjY5MCwiZXhwIjoxNzc3MjA3NTkwfQ.arOg5Lk4wdtMjw2HweBVXiXfRbPXgTbpboNd_uJdZ9Q",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/client/69ee063a273db8ce37e053aa",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "client",
+                "69ee063a273db8ce37e053aa"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updateClient",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWRmZmJkMzIzOTA1NWJkZTY3MzExOCIsImlhdCI6MTc3NzIwNTE4MSwiZXhwIjoxNzc3MjA2MDgxfQ.UjlUvJVkTrZ_LHo2oXp8T1LRkF7d1Y0Yltx-A55snOg",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Cliente Actualizado\",\n  \"email\": \"nuevoemail@ejemplo.com\",\n  \"phone\": \"611223344\",\n  \"address\": {\n    \"street\": \"Calle Nueva\",\n    \"number\": \"20\",\n    \"postal\": \"28010\",\n    \"city\": \"Madrid\",\n    \"province\": \"Madrid\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/client/69ee0155273db8ce37e05350",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "client",
+                "69ee0155273db8ce37e05350"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "deleteClient",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWUwYTI2MjczZGI4Y2UzN2UwNTNiOCIsImlhdCI6MTc3NzIwNzg0NiwiZXhwIjoxNzc3MjA4NzQ2fQ.cvQ0TuwYxEVa9W0_6hRnvOud50cNaVJaLPukaMZiZnI",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/client/69ee0acd273db8ce37e053c1?deleteMethod=true",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "client",
+                "69ee0acd273db8ce37e053c1"
+              ],
+              "query": [
+                {
+                  "key": "deleteMethod",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "restoreClient",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWUwYTI2MjczZGI4Y2UzN2UwNTNiOCIsImlhdCI6MTc3NzIwNzg0NiwiZXhwIjoxNzc3MjA4NzQ2fQ.cvQ0TuwYxEVa9W0_6hRnvOud50cNaVJaLPukaMZiZnI",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/client/69ee0acd273db8ce37e053c1/restore",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "client",
+                "69ee0acd273db8ce37e053c1",
+                "restore"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Proyect",
+      "item": [
+        {
+          "name": "createProject",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWUyYWVlZjEyOWVlZjExOTc0YjkyOSIsImlhdCI6MTc3NzIxNjIzOCwiZXhwIjoxNzc3MjE3MTM4fQ.ZD_vMd7nCxAXFPl1Dok-HvNJAL3C-ORcty4G-qJ67A0",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Reforma Piso Centro\",\n  \"projectCode\": \"PRJ001\",\n  \"client\": \"69ee2b2af129eef11974b935\",\n  \"address\": {\n    \"street\": \"Gran Vía\",\n    \"number\": \"10\",\n    \"postal\": \"28013\",\n    \"city\": \"Madrid\",\n    \"province\": \"Madrid\"\n  },\n  \"email\": \"obra@proyecto.com\",\n  \"notes\": \"Proyecto de reforma integral\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/project",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "project"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updateProject",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWUxNzEzNGRkMGMxZjVjNTQzNzIzNiIsImlhdCI6MTc3NzIxMTE1NSwiZXhwIjoxNzc3MjEyMDU1fQ.tIu4K364amGu859ISSVjRc1gPpI6ziL55qP0ij30-dA",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Reforma Piso Centro Actualizado\",\n  \"projectCode\": \"PRJ001\",\n  \"client\": \"69ee05db273db8ce37e05398\",\n  \"address\": {\n    \"street\": \"Gran Vía\",\n    \"number\": \"12\",\n    \"postal\": \"28013\",\n    \"city\": \"Madrid\",\n    \"province\": \"Madrid\"\n  },\n  \"email\": \"nuevo@proyecto.com\",\n  \"notes\": \"Proyecto actualizado con cambios en estructura\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/project/69ee17c44dd0c1f5c5437254",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "project",
+                "69ee17c44dd0c1f5c5437254"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetProjects",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWUxNzEzNGRkMGMxZjVjNTQzNzIzNiIsImlhdCI6MTc3NzIxMTE1NSwiZXhwIjoxNzc3MjEyMDU1fQ.tIu4K364amGu859ISSVjRc1gPpI6ziL55qP0ij30-dA",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/project",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "project"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getArchived",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWUxNzEzNGRkMGMxZjVjNTQzNzIzNiIsImlhdCI6MTc3NzIxMTE1NSwiZXhwIjoxNzc3MjEyMDU1fQ.tIu4K364amGu859ISSVjRc1gPpI6ziL55qP0ij30-dA",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/project/archived",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "project",
+                "archived"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getById",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWUxNzEzNGRkMGMxZjVjNTQzNzIzNiIsImlhdCI6MTc3NzIxMTE1NSwiZXhwIjoxNzc3MjEyMDU1fQ.tIu4K364amGu859ISSVjRc1gPpI6ziL55qP0ij30-dA",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/project/69ee17c44dd0c1f5c5437254",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "project",
+                "69ee17c44dd0c1f5c5437254"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWUxNzEzNGRkMGMxZjVjNTQzNzIzNiIsImlhdCI6MTc3NzIxMTE1NSwiZXhwIjoxNzc3MjEyMDU1fQ.tIu4K364amGu859ISSVjRc1gPpI6ziL55qP0ij30-dA",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/project/69ee17c44dd0c1f5c5437254?soft=true",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "project",
+                "69ee17c44dd0c1f5c5437254"
+              ],
+              "query": [
+                {
+                  "key": "soft",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "restore",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWUxNzEzNGRkMGMxZjVjNTQzNzIzNiIsImlhdCI6MTc3NzIxMTE1NSwiZXhwIjoxNzc3MjEyMDU1fQ.tIu4K364amGu859ISSVjRc1gPpI6ziL55qP0ij30-dA",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/project/69ee17c44dd0c1f5c5437254/restore",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "project",
+                "69ee17c44dd0c1f5c5437254",
+                "restore"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Albaran",
+      "item": [
+        {
+          "name": "createDeliveryNote",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWUyYWVlZjEyOWVlZjExOTc0YjkyOSIsImlhdCI6MTc3NzIxNjIzOCwiZXhwIjoxNzc3MjE3MTM4fQ.ZD_vMd7nCxAXFPl1Dok-HvNJAL3C-ORcty4G-qJ67A0",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"project\": \"69ee2b4df129eef11974b93a\",\n  \"client\": \"69ee2b2af129eef11974b935\",\n\n  \"format\": \"material\",\n  \"description\": \"Entrega de material en obra\",\n\n  \"workDate\": \"2026-04-26\",\n\n  \"material\": \"Cemento\",\n  \"quantity\": 10,\n  \"unit\": \"sacos\",\n\n  \"hours\": 0,\n  \"workers\": [\n    {\n      \"name\": \"Juan\",\n      \"hours\": 4\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/deliverynote",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "deliverynote"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getdeliveryNotes",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWUyYWVlZjEyOWVlZjExOTc0YjkyOSIsImlhdCI6MTc3NzIxNjIzOCwiZXhwIjoxNzc3MjE3MTM4fQ.ZD_vMd7nCxAXFPl1Dok-HvNJAL3C-ORcty4G-qJ67A0",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/deliverynote",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "deliverynote"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getdeliveryNotesById",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWUyNzAwMTkyZTg3YTVjYmNlMGViYSIsImlhdCI6MTc3NzIxNTIzMiwiZXhwIjoxNzc3MjE2MTMyfQ.7A_dN735K3OffKcv5DEBxW4lThMChCIc6qQvCURPiKU",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/deliverynote/69ee27a3192e87a5cbce0ecc",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "deliverynote",
+                "69ee27a3192e87a5cbce0ecc"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getdeliveryNotesByPdf",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWUyNzAwMTkyZTg3YTVjYmNlMGViYSIsImlhdCI6MTc3NzIxNTIzMiwiZXhwIjoxNzc3MjE2MTMyfQ.7A_dN735K3OffKcv5DEBxW4lThMChCIc6qQvCURPiKU",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/pdf",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/deliverynote/pdf/69ee2a0df129eef11974b91b",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "deliverynote",
+                "pdf",
+                "69ee2a0df129eef11974b91b"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWUyYWVlZjEyOWVlZjExOTc0YjkyOSIsImlhdCI6MTc3NzIxNjIzOCwiZXhwIjoxNzc3MjE3MTM4fQ.ZD_vMd7nCxAXFPl1Dok-HvNJAL3C-ORcty4G-qJ67A0",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/deliverynote/69ee2b90f129eef11974b94a",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "deliverynote",
+                "69ee2b90f129eef11974b94a"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sign",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWUyYWVlZjEyOWVlZjExOTc0YjkyOSIsImlhdCI6MTc3NzIxNjIzOCwiZXhwIjoxNzc3MjE3MTM4fQ.ZD_vMd7nCxAXFPl1Dok-HvNJAL3C-ORcty4G-qJ67A0",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "signature",
+                  "type": "file",
+                  "uuid": "323dbd7d-bbc9-4253-8f9e-e407a3a1125a",
+                  "src": "postman-cloud:///1f110aa3-5473-45a0-944e-89bbdcec2c18"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/deliverynote/69ee2b90f129eef11974b94a/sign",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "deliverynote",
+                "69ee2b90f129eef11974b94a",
+                "sign"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

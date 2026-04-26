@@ -2,12 +2,13 @@ import DeliveryNote from "../models/DeliveryNote.js";
 import Project from "../models/Project.js";
 import { AppError } from "../utils/AppError.js";
 import PDFDocument from "pdfkit";
-
+import Client from "../models/Client.js";
 
 export const createDeliveryNote = async (req, res) => 
 {
   const {
     project,
+    client,
     format,
     description,
     workDate,
@@ -29,11 +30,21 @@ export const createDeliveryNote = async (req, res) =>
     throw AppError.notFound("Proyecto no válido");
   }
 
+  const clientExists = await Client.findOne({
+    _id: client,
+    company: req.user.company
+  });
+
+  if (!clientExists) {
+    throw AppError.notFound("Cliente no válido");
+  }
+
   const deliveryNote = await DeliveryNote.create
   ({
     user: req.user.id,
     company: req.user.company,
     project,
+    client,
     format,
     description,
     workDate,
@@ -146,8 +157,8 @@ export const getDeliveryNotePDF = async (req, res) =>
   res.setHeader("Content-Type", "application/pdf");
   doc.pipe(res);
 
-  doc.text(`Proyecto: ${dn.project.name}`);
-  doc.text(`Cliente: ${dn.client.name}`);
+  doc.text(`Proyecto: ${dn.project?.name || "Sin proyecto"}`);
+  doc.text(`Cliente: ${dn.client?.name || "Sin cliente"}`);
   doc.text(`Fecha: ${dn.workDate}`);
 
   doc.text(`Tipo: ${dn.format}`);
@@ -170,7 +181,9 @@ export const getDeliveryNotePDF = async (req, res) =>
   if (dn.signed) 
   {
     doc.text("FIRMADO");
+    if (dn.signatureUrl) {
     doc.image(dn.signatureUrl, { width: 150 });
+  }
   }
 
   doc.end();

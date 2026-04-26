@@ -1,11 +1,11 @@
-import express from "express";
+import Router from "express";
 
 import userRoutes from "./user.routes.js";
 import clientRoutes from "./client.routes.js";
 import projectRoutes from "./project.routes.js";
 import deliverynoteRoutes from "./deliveryNote.routes.js";
 
-const router = express.Router();
+const router = Router();
 
 router.use("/user", userRoutes);
 router.use("/client", clientRoutes);
