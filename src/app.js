@@ -9,6 +9,8 @@ import { errorHandler, notFoundHandler } from './middleware/error-handler.js';
 import morganBody from 'morgan-body';
 import { loggerStream } from './utils/handleLogger.js';
 import routes from "./routes/index.js";
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./docs/swagger.js";
 
 const app = express();
 
@@ -33,6 +35,8 @@ app.get('/health', (req, res) =>
 {
   res.json({ status: 'ok' });
 });
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/api", routes);
 app.use(notFoundHandler);

@@ -14,7 +14,7 @@ export const registerUser = async (req, res) =>
     if (existingUser) { return res.status(400).json({ message: 'email ya registrado' });}
     const hashedPassword = await encrypt(password);
     const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
-
+    
     const newUser = new User({
       email,
       password: hashedPassword,
@@ -165,9 +165,6 @@ export const updateCompanyData = async (req, res) =>
     await user.save();
 
     return res.status(200).json({ message: 'compañía datos actualizados', company, user });
-
-
-
 
 }
 
