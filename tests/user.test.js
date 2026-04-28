@@ -34,6 +34,22 @@ export const createUserAndLogin = async (suffix = Date.now()) => {
 
 describe("FLUJO DE USUARIO", () => {
 
+  beforeAll(async () => {
+    
+    const collections = mongoose.connection.collections;
+    for (const key in collections) {
+      await collections[key].deleteMany({});
+    }
+  });
+
+  afterEach(async () => {
+    const collections = mongoose.connection.collections;
+    for (const key in collections) {
+      await collections[key].deleteMany({});
+    }
+  });
+
+
   describe("REGISTRO", () => {
     it("debería registrar al usuario e iniciar sesión", async () => {
       const user = await createUserAndLogin("registro");
