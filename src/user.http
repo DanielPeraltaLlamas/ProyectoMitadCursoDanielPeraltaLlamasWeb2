@@ -3,8 +3,8 @@ POST http://localhost:3000/api/user/register
 Content-Type: application/json
 
 {
-  "email": "prueba456789@example.com",
-  "password": "con1234"
+  "email": "pruebadfghj@example.com",
+  "password": "12678153563"
 }
 
 ### 2) Validación de email
@@ -21,12 +21,12 @@ POST http://localhost:3000/api/user/login
 Content-Type: application/json
 
 {
-  "email": "prueba38@example.com",
-  "password": "contrasenia123"
+  "email": "prueba428121@example.com",
+  "password": "12678153563"
 }
 
 ### 4) Onboarding: datos personales
-PUT http://localhost:3000/api/user/register
+PUT http://localhost:3000/api/user/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZDI2NGJhNDRmNWY2MWNlMjNmODEzMSIsImlhdCI6MTc3NTM5NjAyNiwiZXhwIjoxNzc1Mzk2OTI2fQ.B0B1Eis9AkloFSLfmx3v8tw41jHqbaVU3-TVOPtaj6Q
 Content-Type: application/json
 
@@ -61,11 +61,11 @@ GET http://localhost:3000/api/user
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZDI2NTkyZjQ5ODIzMjNmNzVhM2UzNCIsImlhdCI6MTc3NTM5NjI0MiwiZXhwIjoxNzc1Mzk3MTQyfQ.XYUauc2PE5NMiwXUSyPLGyRGxCmHrmGOIYcv7HM5scc
 ### 7) Cambiar contraseña
 PUT http://localhost:3000/api/user/password
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZDI2NTkyZjQ5ODIzMjNmNzVhM2UzNCIsImlhdCI6MTc3NTM5NjI0MiwiZXhwIjoxNzc1Mzk3MTQyfQ.XYUauc2PE5NMiwXUSyPLGyRGxCmHrmGOIYcv7HM5scc
-Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWZhMGYyMmQ4NDViYTdiZjc5N2IzZiIsImlhdCI6MTc3NzMxMTk4NiwiZXhwIjoxNzc3MzEyODg2fQ.Nsum7O6TDi7-oz92pdbHhgs1xJqKaA1HCOw85uXUU_w
+Content-Type: application/json 
 
 {
-  "currentPassword": "contrasenia1234",
+  "currentPassword": "12678153563",
   "newPassword": "password456"
 }
 

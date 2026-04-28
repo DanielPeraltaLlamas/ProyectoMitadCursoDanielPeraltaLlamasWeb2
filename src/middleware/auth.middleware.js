@@ -4,6 +4,7 @@ import { AppError } from '../utils/AppError.js';
 import User from '../models/User.js';
 
 const authMiddleware = async (req, res, next) => {
+  
   try {
     let token;
 

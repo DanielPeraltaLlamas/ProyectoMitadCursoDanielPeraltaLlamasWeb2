@@ -343,7 +343,7 @@ userRouter.delete("/", deleteUser);
  *                 type: string
  *                 minLength: 8
  */
-userRouter.put("/password", validate(passwordSchema), changePassword);
+userRouter.put("/password", authMiddleware,validate(passwordSchema), changePassword);
 
 /**
  * @openapi

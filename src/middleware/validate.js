@@ -10,8 +10,10 @@ export const validate = (schema) => async (req, res, next) => {
     });
     next();
   } catch (err) {
+    console.log('Error type:', err?.constructor?.name);
+    console.log('Error:', JSON.stringify(err, null, 2));
     if (err instanceof ZodError) {
-      const errores = err.errors.map(e => ({
+      const errores = err.issues.map(e => ({
         campo: e.path.join('.') || 'body',
         mensaje: e.message
       }));
@@ -28,7 +30,7 @@ export const validateBody = (schema) => async (req, res, next) => {
     next();
   } catch (err) {
     if (err instanceof ZodError) {
-      const errores = err.errors.map(e => ({
+      const errores = err.issues.map(e => ({
         campo: e.path.join('.') || 'body',
         mensaje: e.message
       }));

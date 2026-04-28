@@ -135,7 +135,7 @@ export const updateCompanyData = async (req, res) =>
       company = await Company.create({
         owner: user._id,
         name,
-        cif: user.nif,
+        cif: req.body.nif || user.nif,
         address,
         isFreelance: true
       });
