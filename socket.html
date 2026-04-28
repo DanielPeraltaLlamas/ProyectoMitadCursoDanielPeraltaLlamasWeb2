@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prueba Real-Time</title>
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+</head>
+<body>
+    <h1>Notificaciones en tiempo real</h1>
+    <div id="log"></div>
+
+    <script>
+        
+        const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZjA5M2QzZmUxNjQ4MzA2ZmVhNDgyNyIsImlhdCI6MTc3NzM3NDE2MywiZXhwIjoxNzc3Mzc1MDYzfQ.UHm1477K80v3Dqy6lxe48RIove7y5WyMY_MBx2Mnq3o"; 
+
+        const socket = io('http://localhost:3000', {
+            auth: { token: TOKEN }
+        });
+
+        socket.on('connect', () => {
+            addMessage("Conectado al servidor");
+        });
+
+        socket.on('connect_error', (err) => {
+            addMessage("Error de conexión: " + err.message);
+        });
+
+        
+        socket.on('client:new', (data) => {
+            addMessage("NUEVO CLIENTE: " + data.name);
+        });
+
+        socket.on('project:new', (data) => {
+            addMessage("NUEVO PROYECTO: " + data.name);
+        });
+
+        socket.on('deliverynote:new', (data) => {
+            addMessage("ALBARÁN CREADO: ID " + data._id);
+        });
+
+        socket.on('deliverynote:signed', (data) => {
+            addMessage("ALBARÁN FIRMADO: ID " + data._id);
+        });
+
+        function addMessage(msg) {
+            const div = document.getElementById('log');
+            div.innerHTML += `<p>${new Date().toLocaleTimeString()} - ${msg}</p>`;
+        }
+    </script>
+</body>
+</html>

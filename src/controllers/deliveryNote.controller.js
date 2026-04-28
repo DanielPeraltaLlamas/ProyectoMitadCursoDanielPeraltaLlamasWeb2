@@ -56,6 +56,11 @@ export const createDeliveryNote = async (req, res) =>
     signed: false
   });
 
+  const io = req.app.get('io');
+        if (io && req.user?.company) {
+            io.to(req.user.company.toString()).emit('deliverynote:new', deliveryNote);
+        }
+
   res.status(201).json(deliveryNote);
 };
 
@@ -210,7 +215,10 @@ export const signDeliveryNote = async (req, res) => {
   dn.signatureUrl = signatureUrl;
 
   await dn.save();
-
+  const io = req.app.get('io');
+        if (io && req.user?.company) {
+            io.to(req.user.company.toString()).emit('deliverynote:signed', dn);
+        }
   res.json({
     message: "Albarán firmado",
     dn

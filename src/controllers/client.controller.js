@@ -30,6 +30,12 @@ export const createClient = async(req,res) =>
         company: req.user.company
     });
 
+    const io = req.app.get('io');
+        if (io && req.user?.company) {
+            const room = req.user.company.toString();
+            io.to(req.user.company.toString()).emit('client:new', client);
+        }
+
     res.status(201).json(client);
 }
 

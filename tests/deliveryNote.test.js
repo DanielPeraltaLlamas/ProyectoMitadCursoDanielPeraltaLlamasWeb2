@@ -37,7 +37,7 @@ const setupFullContext = async (idSuffix) => {
   return { token, clientId: clientRes.body._id, projectId: projectRes.body._id };
 };
 
-describe("MÓDULO DE ALBARANES - TESTS FINALES", () => {
+describe("MÓDULO DE ALBARANES", () => {
   
   beforeEach(async () => {
     await DeliveryNote.deleteMany({});

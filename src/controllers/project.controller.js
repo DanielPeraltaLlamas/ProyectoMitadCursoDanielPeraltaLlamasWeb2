@@ -42,6 +42,13 @@ export const createProject = async(req,res) =>
         company: req.user.company,
         active: true
   });
+    const io = req.app.get('io');
+  
+    if (io && req.user?.company) {
+      
+        const roomName = req.user.company.toString();
+        io.to(roomName).emit('project:new', project);
+    }
 
   res.status(201).json(project);
 }

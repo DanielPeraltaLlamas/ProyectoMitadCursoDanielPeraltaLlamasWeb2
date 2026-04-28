@@ -11,8 +11,38 @@ import { loggerStream } from './utils/handleLogger.js';
 import routes from "./routes/index.js";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./docs/swagger.js";
+import { createServer } from 'node:http'; 
+import { Server } from 'socket.io';
+import { authSocketMiddleware } from "./middleware/auth.socket.middleware.js";
 
 const app = express();
+
+const httpServer = createServer(app);
+
+const io = new Server(httpServer, {
+  cors: {
+    origin: "*", 
+    methods: ["GET", "POST"]
+  }
+});
+
+io.use(authSocketMiddleware);
+
+io.on('connection', (socket) => {
+  const companyId = socket.user.companyId; 
+  
+  if (companyId) {
+    socket.join(companyId.toString());
+    console.log(`[WS] Usuario ${socket.user.id} unido a room: ${companyId}`);
+  }
+
+  socket.on('disconnect', () => {
+    console.log(`[WS] Usuario desconectado: ${socket.id}`);
+  });
+});
+
+app.set('io', io);
+
 
 app.use(helmet());
 app.use(cors());
@@ -42,5 +72,6 @@ app.use("/api", routes);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
+export { app, httpServer };
 export default app;
 
