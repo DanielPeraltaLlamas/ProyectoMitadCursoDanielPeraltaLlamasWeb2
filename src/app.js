@@ -14,6 +14,8 @@ import swaggerSpec from "./docs/swagger.js";
 import { createServer } from 'node:http'; 
 import { Server } from 'socket.io';
 import { authSocketMiddleware } from "./middleware/auth.socket.middleware.js";
+import mongoose from "mongoose";
+
 
 const app = express();
 
@@ -61,9 +63,13 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-app.get('/health', (req, res) => 
-{
-  res.json({ status: 'ok' });
+app.get('/health', (req, res) => {
+  res.json({ 
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    db: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
+  });
 });
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
@@ -72,6 +78,8 @@ app.use("/api", routes);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-export { app, httpServer };
+
+
+export {httpServer };
 export default app;
 
