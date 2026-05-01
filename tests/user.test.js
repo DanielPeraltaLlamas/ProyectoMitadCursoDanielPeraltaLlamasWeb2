@@ -214,10 +214,15 @@ describe("FLUJO DE USUARIO", () => {
         })
         .expect(200);
 
+        const fakeImage = Buffer.from(
+        "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=",
+        "base64"
+      );
+
       const res = await request(app)
         .patch("/api/user/logo")
         .set("Authorization", `Bearer ${user.token}`) 
-        .attach("logo", Buffer.from("fake-image"), "logo.png")
+        .attach("logo", Buffer.from(fakeImage), "logo.png")
         .expect(200);
 
       expect(res.body.message).toBe("Logo subido correctamente");
