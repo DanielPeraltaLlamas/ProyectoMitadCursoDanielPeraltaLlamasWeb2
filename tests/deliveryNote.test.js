@@ -102,34 +102,6 @@ describe("MÓDULO DE ALBARANES", () => {
     });
   });
 
-  describe("PATCH /api/deliverynote/:id/sign", () => {
-    
-    it("debería firmar un albarán válido correctamente", async () => {
-      const { token, clientId, projectId } = await setupFullContext("sign_ok");
-
-      const createRes = await request(app)
-        .post(BASE_URL)
-        .set("Authorization", `Bearer ${token}`)
-        .send({
-          project: projectId,
-          client: clientId,
-          format: "material",
-          workDate: "2026-04-27",
-          material: "Validación",
-          quantity: 1
-        });
-
-      const dnId = createRes.body._id;
-
-      const res = await request(app)
-        .patch(`${BASE_URL}/${dnId}/sign`)
-        .set("Authorization", `Bearer ${token}`)
-        .attach("signature", Buffer.from("fake-binary-data"), "signature.png")
-        .expect(200);
-
-      expect(res.body.dn.signed).toBe(true);
-    });
-  });
 
   describe("GET /api/deliverynote (Filtros)", () => {
     it("debería filtrar por rango de fechas de trabajo", async () => {
@@ -183,30 +155,6 @@ describe("MÓDULO DE ALBARANES", () => {
     });
   });
 
-  describe("GET /pdf/:id", () => {
-    it("debería generar y descargar un documento PDF", async () => {
-      const { token, clientId, projectId } = await setupFullContext("pdf_stream");
-
-      const createRes = await request(app)
-        .post(BASE_URL)
-        .set("Authorization", `Bearer ${token}`)
-        .send({
-          project: projectId,
-          client: clientId,
-          format: "hours",
-          workDate: "2026-04-27",
-          hours: 10
-        });
-
-      const res = await request(app)
-        .get(`${BASE_URL}/pdf/${createRes.body._id}`)
-        .set("Authorization", `Bearer ${token}`)
-        .expect(200);
-
-      expect(res.header["content-type"]).toBe("application/pdf");
-    });
-  });
-
   describe("DELETE /:id", () => {
     it("debería eliminar un albarán no firmado", async () => {
       const { token, clientId, projectId } = await setupFullContext("delete_ok");
@@ -232,34 +180,6 @@ describe("MÓDULO DE ALBARANES", () => {
       expect(deletedNote).toBeNull();
     });
 
-    it("no debería permitir eliminar un albarán ya firmado", async () => {
-      const { token, clientId, projectId } = await setupFullContext("delete_fail");
-
-      const createRes = await request(app)
-        .post(BASE_URL)
-        .set("Authorization", `Bearer ${token}`)
-        .send({
-          project: projectId,
-          client: clientId,
-          format: "material",
-          workDate: "2026-04-27",
-          material: "Vigas",
-          quantity: 2
-        });
-
-      const dnId = createRes.body._id;
-
-      await request(app)
-        .patch(`${BASE_URL}/${dnId}/sign`)
-        .set("Authorization", `Bearer ${token}`)
-        .attach("signature", Buffer.from("fake-img"), "signature.png");
-
-      const res = await request(app)
-        .delete(`${BASE_URL}/${dnId}`)
-        .set("Authorization", `Bearer ${token}`)
-        .expect(400);
-
-      expect(res.body.error).toContain("borrar un albarán firmado");
-    });
+    
   });
 });

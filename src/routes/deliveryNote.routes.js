@@ -7,17 +7,14 @@ import {
   signDeliveryNote,
   deleteDeliveryNote
 } from "../controllers/deliveryNote.controller.js";
-
 import { validate } from "../middleware/validate.js";
-
 import {
   createDeliveryNoteSchema,
   getDeliveryNotesSchema,
   signDeliveryNoteSchema
 } from "../validators/deliveryNote.validator.js";
-
 import authMiddleware from "../middleware/auth.middleware.js";
-import { uploadMiddleware } from "../middleware/upload.js";
+import { uploadMiddlewareCloud } from "../middleware/upload.cloud.middleware.js";
 
 const router = Router();
 
@@ -34,42 +31,7 @@ const router = Router();
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             required:
- *               - project
- *               - client
- *               - format
- *               - workDate
- *             properties:
- *               project:
- *                 type: string
- *               client:
- *                 type: string
- *               format:
- *                 type: string
- *                 enum: [material, hours]
- *               description:
- *                 type: string
- *               workDate:
- *                 type: string
- *                 format: date
- *               material:
- *                 type: string
- *               quantity:
- *                 type: number
- *               unit:
- *                 type: string
- *               hours:
- *                 type: number
- *               workers:
- *                 type: array
- *                 items:
- *                   type: object
- *                   properties:
- *                     name:
- *                       type: string
- *                     hours:
- *                       type: number
+ *             $ref: '#/components/schemas/DeliveryNote'
  *     responses:
  *       201:
  *         description: Albarán creado
@@ -171,10 +133,6 @@ router.get("/:id", authMiddleware, getDeliveryNote);
  *     responses:
  *       200:
  *         description: PDF generado
- *       403:
- *         description: Sin permisos
- *       404:
- *         description: No encontrado
  */
 router.get("/pdf/:id", authMiddleware, getDeliveryNotePDF);
 
@@ -205,15 +163,11 @@ router.get("/pdf/:id", authMiddleware, getDeliveryNotePDF);
  *     responses:
  *       200:
  *         description: Firmado correctamente
- *       400:
- *         description: Ya firmado o inválido
- *       404:
- *         description: No encontrado
  */
 router.patch(
   "/:id/sign",
   authMiddleware,
-  uploadMiddleware.single("signature"),
+  uploadMiddlewareCloud.single("signature"),
   validate(signDeliveryNoteSchema),
   signDeliveryNote
 );
@@ -235,10 +189,6 @@ router.patch(
  *     responses:
  *       200:
  *         description: Eliminado correctamente
- *       400:
- *         description: No se puede borrar (firmado)
- *       404:
- *         description: No encontrado
  */
 router.delete("/:id", authMiddleware, deleteDeliveryNote);
 

@@ -47,14 +47,32 @@ const userRouter = Router();
  *               email:
  *                 type: string
  *                 format: email
- *                 example: test@test.com
  *               password:
  *                 type: string
  *                 minLength: 8
- *                 example: 12345678
  *     responses:
  *       201:
  *         description: Usuario creado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     email:
+ *                       type: string
+ *                     status:
+ *                       type: string
+ *                     role:
+ *                       type: string
+ *                 accessToken:
+ *                   type: string
+ *                 refreshToken:
+ *                   type: string
+ *                 verificationCode:
+ *                   type: string
  *       400:
  *         description: Email ya registrado o datos inválidos
  */
@@ -86,7 +104,7 @@ userRouter.post("/register", validate(registerSchema), registerUser);
  *       400:
  *         description: Código incorrecto
  *       429:
- *         description: Sin intentos
+ *         description: Sin intentos restantes
  */
 userRouter.put(
   "/validation",
@@ -117,6 +135,24 @@ userRouter.put(
  *     responses:
  *       200:
  *         description: Login correcto
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     email:
+ *                       type: string
+ *                     role:
+ *                       type: string
+ *                     status:
+ *                       type: string
+ *                 accessToken:
+ *                   type: string
+ *                 refreshToken:
+ *                   type: string
  *       401:
  *         description: Credenciales incorrectas
  *       404:
@@ -143,8 +179,17 @@ userRouter.post("/login", validate(loginSchema), loginUser);
  *     responses:
  *       200:
  *         description: Token renovado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 accessToken:
+ *                   type: string
+ *                 refreshToken:
+ *                   type: string
  *       401:
- *         description: Refresh token inválido
+ *         description: Refresh token inválido o usuario no encontrado
  */
 userRouter.post("/refresh", refreshToken);
 
@@ -160,7 +205,14 @@ userRouter.use(authMiddleware);
  *     summary: Obtener usuario actual
  *     responses:
  *       200:
- *         description: Usuario actual
+ *         description: Usuario encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 user:
+ *                   $ref: '#/components/schemas/User'
  */
 userRouter.get("/", getUser);
 
@@ -171,54 +223,23 @@ userRouter.get("/", getUser);
  *     tags: [User]
  *     security:
  *       - bearerAuth: []
- *     summary: Completar datos personales / empresa
+ *     summary: Actualizar datos personales
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             oneOf:
- *               - type: object
- *                 properties:
- *                   isFreelance:
- *                     type: boolean
- *                     example: true
- *                   name:
- *                     type: string
- *                     minLength: 2
- *                   lastName:
- *                     type: string
- *                     minLength: 2
- *                   nif:
- *                     type: string
- *                     minLength: 5
- *               - type: object
- *                 properties:
- *                   isFreelance:
- *                     type: boolean
- *                     example: false
- *                   name:
- *                     type: string
- *                     minLength: 2
- *                   lastName:
- *                     type: string
- *                     minLength: 2
- *                   cif:
- *                     type: string
- *                     minLength: 5
- *                   address:
- *                     type: object
- *                     properties:
- *                       street:
- *                         type: string
- *                       number:
- *                         type: string
- *                       postal:
- *                         type: string
- *                       city:
- *                         type: string
- *                       province:
- *                         type: string
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               lastName:
+ *                 type: string
+ *               nif:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Datos personales actualizados
  */
 userRouter.put("/", validateBody(onboardingSchema), updatePersonalData);
 
@@ -236,9 +257,6 @@ userRouter.put("/", validateBody(onboardingSchema), updatePersonalData);
  *         application/json:
  *           schema:
  *             type: object
- *             required:
- *               - isFreelance
- *               - name
  *             properties:
  *               isFreelance:
  *                 type: boolean
@@ -247,23 +265,19 @@ userRouter.put("/", validateBody(onboardingSchema), updatePersonalData);
  *               cif:
  *                 type: string
  *               address:
- *                 type: object
- *                 properties:
- *                   street:
- *                     type: string
- *                   number:
- *                     type: string
- *                   postal:
- *                     type: string
- *                   city:
- *                     type: string
- *                   province:
- *                     type: string
+ *                 type: string
  *     responses:
  *       200:
- *         description: compañía datos actualizados
- *       400:
- *         description: datos inválidos
+ *         description: Empresa actualizada
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 company:
+ *                   $ref: '#/components/schemas/Company'
+ *                 user:
+ *                   $ref: '#/components/schemas/User'
  */
 userRouter.patch("/company", validateBody(onboardingSchema), updateCompanyData);
 
@@ -281,10 +295,25 @@ userRouter.patch("/company", validateBody(onboardingSchema), updateCompanyData);
  *         multipart/form-data:
  *           schema:
  *             type: object
+ *             required: [logo]
  *             properties:
  *               logo:
  *                 type: string
  *                 format: binary
+ *     responses:
+ *       200:
+ *         description: Logo subido correctamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 logo:
+ *                   type: string
+ *       400:
+ *         description: Sin compañía o sin archivo
+ *       404:
+ *         description: Compañía no encontrada
  */
 userRouter.patch(
   "/logo",
@@ -300,6 +329,9 @@ userRouter.patch(
  *     security:
  *       - bearerAuth: []
  *     summary: Logout usuario
+ *     responses:
+ *       200:
+ *         description: Sesión cerrada correctamente
  */
 userRouter.post("/logout", logoutUser);
 
@@ -317,6 +349,10 @@ userRouter.post("/logout", logoutUser);
  *         schema:
  *           type: string
  *           enum: ["true", "false"]
+ *         description: Si es true, hace soft delete; si es false, elimina definitivamente
+ *     responses:
+ *       200:
+ *         description: Usuario eliminado
  */
 userRouter.delete("/", deleteUser);
 
@@ -342,8 +378,13 @@ userRouter.delete("/", deleteUser);
  *               newPassword:
  *                 type: string
  *                 minLength: 8
+ *     responses:
+ *       200:
+ *         description: Contraseña actualizada
+ *       401:
+ *         description: Contraseña actual incorrecta
  */
-userRouter.put("/password", authMiddleware,validate(passwordSchema), changePassword);
+userRouter.put("/password", authMiddleware, validate(passwordSchema), changePassword);
 
 /**
  * @openapi
@@ -353,7 +394,7 @@ userRouter.put("/password", authMiddleware,validate(passwordSchema), changePassw
  *     security:
  *       - bearerAuth: []
  *     summary: Invitar usuario
- *     description: Solo admin
+ *     description: Solo administradores pueden invitar nuevos usuarios.
  *     requestBody:
  *       required: true
  *       content:
@@ -367,15 +408,13 @@ userRouter.put("/password", authMiddleware,validate(passwordSchema), changePassw
  *                 format: email
  *               name:
  *                 type: string
- *                 minLength: 2
  *               lastName:
  *                 type: string
- *                 minLength: 2
  *     responses:
  *       201:
  *         description: Usuario invitado
  *       403:
- *         description: No autorizado
+ *         description: Necesitas permisos admin
  *       409:
  *         description: Email ya existe
  */

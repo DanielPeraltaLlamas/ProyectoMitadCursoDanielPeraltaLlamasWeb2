@@ -34,35 +34,12 @@ const router = Router();
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             required: [name, projectCode, client]
- *             properties:
- *               name:
- *                 type: string
- *                 minLength: 1
- *               projectCode:
- *                 type: string
- *                 minLength: 1
- *               client:
- *                 type: string
- *               address:
- *                 type: object
- *                 properties:
- *                   street: { type: string }
- *                   number: { type: string }
- *                   postal: { type: string }
- *                   city: { type: string }
- *                   province: { type: string }
- *               email:
- *                 type: string
- *                 format: email
- *               notes:
- *                 type: string
+ *             $ref: '#/components/schemas/Project'
  *     responses:
  *       201:
  *         description: Proyecto creado
  *       400:
- *         description: Datos inválidos
+ *         $ref: '#/components/schemas/Error'
  *       404:
  *         description: Cliente no válido
  *       409:
@@ -107,8 +84,14 @@ router.post("/", authMiddleware, validate(createProjectSchema), createProject);
  *     responses:
  *       200:
  *         description: Lista de proyectos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Project'
  *       400:
- *         description: Query inválida
+ *         $ref: '#/components/schemas/Error'
  */
 router.get("/", authMiddleware, validate(getProjectsSchema), getProjects);
 
@@ -123,6 +106,12 @@ router.get("/", authMiddleware, validate(getProjectsSchema), getProjects);
  *     responses:
  *       200:
  *         description: Lista de proyectos archivados
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Project'
  */
 router.get("/archived", authMiddleware, getArchivedProjects);
 
@@ -143,8 +132,12 @@ router.get("/archived", authMiddleware, getArchivedProjects);
  *     responses:
  *       200:
  *         description: Proyecto encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Project'
  *       404:
- *         description: No encontrado
+ *         $ref: '#/components/schemas/Error'
  */
 router.get("/:id", authMiddleware, getProjectById);
 
@@ -156,39 +149,23 @@ router.get("/:id", authMiddleware, getProjectById);
  *     security:
  *       - bearerAuth: []
  *     summary: Actualizar proyecto
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *               projectCode:
- *                 type: string
- *               client:
- *                 type: string
- *               address:
- *                 type: object
- *                 properties:
- *                   street: { type: string }
- *                   number: { type: string }
- *                   postal: { type: string }
- *                   city: { type: string }
- *                   province: { type: string }
- *               email:
- *                 type: string
- *                 format: email
- *               notes:
- *                 type: string
- *               active:
- *                 type: boolean
+ *             $ref: '#/components/schemas/Project'
  *     responses:
  *       200:
  *         description: Proyecto actualizado
  *       400:
- *         description: Datos inválidos
+ *         $ref: '#/components/schemas/Error'
  *       404:
  *         description: Proyecto no encontrado
  */
@@ -203,6 +180,11 @@ router.put("/:id", authMiddleware, validate(updateProjectSchema), updateProject)
  *       - bearerAuth: []
  *     summary: Eliminar proyecto
  *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
  *       - name: soft
  *         in: query
  *         schema:
@@ -212,7 +194,7 @@ router.put("/:id", authMiddleware, validate(updateProjectSchema), updateProject)
  *       200:
  *         description: Eliminado o archivado
  *       404:
- *         description: No encontrado
+ *         $ref: '#/components/schemas/Error'
  */
 router.delete("/:id", authMiddleware, deleteProject);
 
@@ -234,7 +216,7 @@ router.delete("/:id", authMiddleware, deleteProject);
  *       200:
  *         description: Proyecto restaurado
  *       404:
- *         description: No encontrado
+ *         $ref: '#/components/schemas/Error'
  */
 router.patch("/:id/restore", authMiddleware, restoreProject);
 

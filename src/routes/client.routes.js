@@ -8,14 +8,12 @@ import {
   getArchivedClients,
   restoreClient
 } from "../controllers/client.controller.js";
-
 import { validate } from "../middleware/validate.js";
 import {
   createClientSchema,
   updateClientSchema,
   getClientsSchema
 } from "../validators/client.validator.js";
-
 import authMiddleware from "../middleware/auth.middleware.js";
 
 const router = Router();
@@ -33,31 +31,12 @@ const router = Router();
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             required: [name, cif]
- *             properties:
- *               name:
- *                 type: string
- *               cif:
- *                 type: string
- *               email:
- *                 type: string
- *                 format: email
- *               phone:
- *                 type: string
- *               address:
- *                 type: object
- *                 properties:
- *                   street: { type: string }
- *                   number: { type: string }
- *                   postal: { type: string }
- *                   city: { type: string }
- *                   province: { type: string }
+ *             $ref: '#/components/schemas/Client'
  *     responses:
  *       201:
  *         description: Cliente creado
  *       400:
- *         description: Datos inválidos
+ *         $ref: '#/components/schemas/Error'
  *       401:
  *         description: No autorizado
  *       409:
@@ -93,10 +72,12 @@ router.post("/", authMiddleware, validate(createClientSchema), createClient);
  *     responses:
  *       200:
  *         description: Lista de clientes
- *       400:
- *         description: Query inválida
- *       401:
- *         description: No autorizado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Client'
  */
 router.get("/", authMiddleware, validate(getClientsSchema), getClients);
 
@@ -111,8 +92,12 @@ router.get("/", authMiddleware, validate(getClientsSchema), getClients);
  *     responses:
  *       200:
  *         description: Lista de clientes archivados
- *       401:
- *         description: No autorizado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Client'
  */
 router.get("/archived", authMiddleware, getArchivedClients);
 
@@ -132,11 +117,12 @@ router.get("/archived", authMiddleware, getArchivedClients);
  *           type: string
  *     responses:
  *       200:
- *         description: Cliente encontrado
- *       401:
- *         description: No autorizado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Client'
  *       404:
- *         description: No encontrado
+ *         $ref: '#/components/schemas/Error'
  */
 router.get("/:id", authMiddleware, getClientById);
 
@@ -152,36 +138,19 @@ router.get("/:id", authMiddleware, getClientById);
  *       - name: id
  *         in: path
  *         required: true
+ *         schema:
+ *           type: string
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               name: { type: string }
- *               cif: { type: string }
- *               email:
- *                 type: string
- *                 format: email
- *               phone: { type: string }
- *               address:
- *                 type: object
- *                 properties:
- *                   street: { type: string }
- *                   number: { type: string }
- *                   postal: { type: string }
- *                   city: { type: string }
- *                   province: { type: string }
+ *             $ref: '#/components/schemas/Client'
  *     responses:
  *       200:
  *         description: Cliente actualizado
- *       400:
- *         description: Datos inválidos
- *       401:
- *         description: No autorizado
  *       404:
- *         description: No encontrado
+ *         $ref: '#/components/schemas/Error'
  */
 router.put("/:id", authMiddleware, validate(updateClientSchema), updateClient);
 
@@ -194,6 +163,11 @@ router.put("/:id", authMiddleware, validate(updateClientSchema), updateClient);
  *       - bearerAuth: []
  *     summary: Eliminar cliente
  *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
  *       - name: deleteMethod
  *         in: query
  *         required: true
@@ -203,12 +177,6 @@ router.put("/:id", authMiddleware, validate(updateClientSchema), updateClient);
  *     responses:
  *       200:
  *         description: Eliminado o archivado
- *       400:
- *         description: Query inválida
- *       401:
- *         description: No autorizado
- *       404:
- *         description: No encontrado
  */
 router.delete("/:id", authMiddleware, deleteClient);
 
@@ -224,13 +192,11 @@ router.delete("/:id", authMiddleware, deleteClient);
  *       - name: id
  *         in: path
  *         required: true
+ *         schema:
+ *           type: string
  *     responses:
  *       200:
  *         description: Cliente restaurado
- *       401:
- *         description: No autorizado
- *       404:
- *         description: No encontrado
  */
 router.patch("/:id/restore", authMiddleware, restoreClient);
 

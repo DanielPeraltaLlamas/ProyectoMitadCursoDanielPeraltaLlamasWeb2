@@ -5,6 +5,7 @@ import {generateToken,generateRefreshToken,verifyToken} from '../utils/jwt.js'
 import notificationService from '../services/notification.service.js';
 import { AppError } from "../utils/AppError.js";
 import { sendSlackNotification } from '../utils/handleLogger.js';
+import { sendVerificationEmail } from "../config/mail.config.js";
 
 
 export const registerUser = async (req, res) => 
@@ -24,12 +25,14 @@ export const registerUser = async (req, res) =>
       verificationAttempts : 3
     });
 
-    
-
     const accessToken = generateToken(newUser._id);
     const refreshToken = generateRefreshToken();
-
     newUser.refreshToken = refreshToken;
+
+    if (process.env.NODE_ENV !== "test") {
+      await sendVerificationEmail(newUser.email, verificationCode);
+    }
+
     await newUser.save();
     await sendSlackNotification(
   `Nuevo usuario registrado\n Email: ${newUser.email}\n Role: ${newUser.role}`
